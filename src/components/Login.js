@@ -1,10 +1,13 @@
 import { useRef, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 import axios from "axios";
 
 const LOGIN_URL_ENDPOINT = 'http://localhost:3000/login';
 
 const Login = () => {
+
+    const navigate = useNavigate();
 
     const { setAuth } = useContext(AuthContext);
 
@@ -46,6 +49,7 @@ const Login = () => {
             setEmail('');
             setPassword('');
             setSuccess(true);
+            navigate('/user/profile');
         }
 
         catch (error) {
@@ -95,7 +99,7 @@ const Login = () => {
 
                     <p>
                         Need an Account? <br />
-                        <a href="/"> Sign Up </a>
+                        <a href="/sign-up"> Sign Up </a>
                     </p>
 
                 </form>
