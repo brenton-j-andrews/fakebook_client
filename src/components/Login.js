@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthProvider";
 import axios from "axios";
 
+// Bootstrap Components.
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 const LOGIN_URL_ENDPOINT = 'http://localhost:3000/login';
 
 const Login = () => {
@@ -18,8 +22,6 @@ const Login = () => {
     const [ password, setPassword ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
 
-    // Replace this with redirect to user profile page in a bit!
-    const [ success, setSuccess ] = useState(false);
 
     // Focus on user input on form.
     useEffect(() => { 
@@ -48,65 +50,74 @@ const Login = () => {
             setAuth({ user: email, password, roles, accessToken });
             setEmail('');
             setPassword('');
-            setSuccess(true);
             navigate('/user/profile');
         }
 
         catch (error) {
-            setErrorMessage("Short message for now: " + error.response);
+            console.log(error.response.data);
+            if (!error?.response) {
+                setErrorMessage("There is an issue on our part, try again later.");
+            }
+
+            setErrorMessage("Error: " + error.message);
             errorRef.current.focus();
         }
     }
  
     return (
-        <>
-            {success ? (
-                <section> Logged in dude. </section>
-            ) : (
+        <section className="d-flex flex-column align-items-center border border-dark rounded p-2">
 
-            <section>
-                <p ref={errorRef} className={ errorMessage ? 'errmsg' : 'offscreen' } aria-live="assertive">
-                    {errorMessage}
-                </p>
+            <p ref={errorRef} className={ errorMessage ? 'errmsg' : 'offscreen' } aria-live="assertive">
+                {errorMessage}
+            </p>
 
-                <h1> Sign In </h1>
+            <h1> Fakebook </h1>
 
-                <form onSubmit={handleSubmit}>
-
-                    <label htmlFor='username'> Username: </label>
-
-                    <input 
-                        type="text" 
-                        id="username"
+            <Form className="d-flex flex-column credential-form mt-3" 
+            onSubmit={handleSubmit}
+            >
+                <Form.Group>
+                    <Form.Label> Email: </Form.Label>
+                    <Form.Control 
+                        className="border-top mb-2"
+                        type="text"
+                        id="email"
                         ref={userRef}
-                        autoComplete="off"
                         onChange={(e) => setEmail(e.target.value)}
+                        autoComplete="off"
                         value={email}
                         required
                     />
+                </Form.Group>
 
-                    <label htmlFor='password'> Password: </label>
-
-                    <input 
+                <Form.Group>
+                    <Form.Label> Password: </Form.Label>
+                    <Form.Control 
+                        className="mb-2"
                         type="password"
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         required
                     />
+                </Form.Group>
 
-                    <button> Sign In </button>
+                <Button 
+                    className="align-self-center container-fluid mt-3 mb-3" 
+                    ariant="primary" 
+                    type="submit"
+                > 
+                    Log In    
+                </Button>
+            </Form>
 
-                    <p>
-                        Need an Account? <br />
-                        <a href="/sign-up"> Sign Up </a>
-                    </p>
+            <div className="d-flex flex-column align-items-center mt-5">
+                <p className="m-0"> Not Registered? </p>
+                 <br />
+                <a href="/sign-up"><strong>Sign Up Here</strong></a>
+            </div>
 
-                </form>
-
-            </section>
-            )}
-        </>
+        </section>
     )
 }
 

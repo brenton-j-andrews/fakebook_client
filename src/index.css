@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Log-In / Sign-Up form styling. */
+
+.credential-form {
+  max-width: 400px;
+}
