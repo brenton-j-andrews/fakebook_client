@@ -1,25 +1,27 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 
 // Bootstrap Components.
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-const LOGIN_URL_ENDPOINT = 'http://localhost:3000/login';
+const SIGNUP_URL_ENDPOINT = 'http://localhost:3000/auth/register';
 
-const Login = () => {
+const SignUp = () => {
 
     const navigate = useNavigate();
 
     const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
+    const firstNameRef = useRef();
     const errorRef = useRef();
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ firstName, setFirstName ] = useState('');
     const [ errorMessage, setErrorMessage ] = useState('');
 
 
@@ -31,15 +33,15 @@ const Login = () => {
     // Clear error messages on any form changes.
     useEffect(() => {
         setErrorMessage('');
-    }, [ email, password ]);
+    }, [ email, password, firstName ]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post(
-                LOGIN_URL_ENDPOINT,
-                JSON.stringify({ email, password }),
+                SIGNUP_URL_ENDPOINT,
+                JSON.stringify({ firstName, email, password }),
                 {
                     headers: { 'Content-Type' : 'application/json', mode:'cors' },
                     withCredentials: false
@@ -48,9 +50,10 @@ const Login = () => {
             const accessToken = response?.data?.accessToken;
             const roles = response?.data.roles;
             setAuth({ user: email, password, roles, accessToken });
+            setFirstName('');
             setEmail('');
             setPassword('');
-            navigate('/user/profile');
+            navigate('/');
         }
 
         catch (error) {
@@ -102,23 +105,37 @@ const Login = () => {
                     />
                 </Form.Group>
 
+                <Form.Group>
+                    <Form.Label> First Name: </Form.Label>
+                    <Form.Control 
+                        className="border-top mb-2"
+                        type="text"
+                        id="firstName"
+                        ref={firstNameRef}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        autoComplete="off"
+                        value={firstName}
+                        required
+                    />
+                </Form.Group>
+
                 <Button 
                     className="align-self-center container-fluid mt-3 mb-3" 
                     ariant="primary" 
                     type="submit"
                 > 
-                    Log In    
+                    Sign Up  
                 </Button>
             </Form>
 
             <div className="d-flex flex-column align-items-center mt-5">
-                <p className="m-0"> Not Registered? </p>
+                <p className="m-0"> Already have an account? </p>
                  <br />
-                <a href="/sign-up"><strong>Sign Up Here</strong></a>
+                <a href="/"><strong> Log In Here</strong></a>
             </div>
 
         </section>
     )
 }
 
-export default Login;
+export default SignUp;

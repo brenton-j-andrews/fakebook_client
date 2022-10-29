@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import my components.
-import Login from "./components/Login";
-import SignUp from './components/SignUp';
-import Profile from './components/Profile';
+import Login from "./components/Pages/Login";
+import SignUp from './components/Pages/SignUp';
+import Profile from './components/Pages/Profile';
 
 // Import Bootstrap components.
 import Container from "react-bootstrap/Container";

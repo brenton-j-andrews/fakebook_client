@@ -1,15 +1,16 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../context/AuthProvider";
+import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 
 // Bootstrap Components.
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Toast from "react-bootstrap/Toast";
 
-const SIGNUP_URL_ENDPOINT = 'http://localhost:3000/signup';
+const LOGIN_URL_ENDPOINT = 'http://localhost:3000/auth/login';
 
-const SignUp = () => {
+const Login = () => {
 
     const navigate = useNavigate();
 
@@ -20,6 +21,8 @@ const SignUp = () => {
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+
+    const [ showErrorToast, setShowErrorToast ] = useState(true);
     const [ errorMessage, setErrorMessage ] = useState('');
 
 
@@ -28,29 +31,45 @@ const SignUp = () => {
         userRef.current.focus();
     }, []);
 
-    // Clear error messages on any form changes.
+    // Re-render on change of errorMessage.
     useEffect(() => {
-        setErrorMessage('');
-    }, [ email, password ]);
+    }, [errorMessage]);
+
+    // Clear error messages on any form changes. LOOK INTO LATER! THIS IS CAUSING ERROR MESSAGE TO DISAPPEAR IMMEDIATELY.
+    // useEffect(() => {
+    //     setErrorMessage('');
+    // }, [ email, password ]);
+
+    const toggleToast = () => setShowErrorToast(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post(
-                SIGNUP_URL_ENDPOINT,
+                LOGIN_URL_ENDPOINT,
                 JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type' : 'application/json', mode:'cors' },
                     withCredentials: false
                 }
             );
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data.roles;
-            setAuth({ user: email, password, roles, accessToken });
-            setEmail('');
-            setPassword('');
-            navigate('/user/profile');
+
+            if (response.data.errorMessage) {
+                console.log(response.data.errorMessage);
+                setErrorMessage(response.data.errorMessage);
+                setShowErrorToast(true);
+                setEmail('');
+                setPassword('');
+            }
+
+            else {
+                const accessToken = response?.data?.accessToken;
+                const roles = response?.data.roles;
+                setAuth({ user: email, password, roles, accessToken });
+                navigate('/user/profile');
+            }
+            
         }
 
         catch (error) {
@@ -65,11 +84,18 @@ const SignUp = () => {
     }
  
     return (
-        <section className="d-flex flex-column align-items-center border border-dark rounded p-2">
+        <section className="d-flex flex-column align-items-center border border-dark rounded pt-3 p-2">
 
-            <p ref={errorRef} className={ errorMessage ? 'errmsg' : 'offscreen' } aria-live="assertive">
-                {errorMessage}
-            </p>
+            <Toast 
+                className="d-flex flex-column align-items-center text-light bg-danger mb-4 p-2"
+                show={showErrorToast} 
+                onClose={toggleToast}
+            > 
+                <Toast.Header className="container-fluid rounded">
+                    <strong className="me-auto">Error: </strong>
+                </Toast.Header>
+                <Toast.Body> {errorMessage} </Toast.Body>
+            </Toast>
 
             <h1> Fakebook </h1>
 
@@ -107,18 +133,18 @@ const SignUp = () => {
                     ariant="primary" 
                     type="submit"
                 > 
-                    Sign Up  
+                    Log In    
                 </Button>
             </Form>
 
             <div className="d-flex flex-column align-items-center mt-5">
-                <p className="m-0"> Already have an account? </p>
+                <p className="m-0"> Not Registered? </p>
                  <br />
-                <a href="/"><strong> Log In Here</strong></a>
+                <a href="/sign-up"><strong>Sign Up Here</strong></a>
             </div>
 
         </section>
     )
 }
 
-export default SignUp;
+export default Login;
