@@ -1,6 +1,5 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 
 // Bootstrap Components.
@@ -14,7 +13,6 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
     const errorRef = useRef();
@@ -22,7 +20,7 @@ const Login = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
-    const [ showErrorToast, setShowErrorToast ] = useState(true);
+    const [ showErrorToast, setShowErrorToast ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState('');
 
 
@@ -50,13 +48,15 @@ const Login = () => {
                 LOGIN_URL_ENDPOINT,
                 JSON.stringify({ email, password }),
                 {
-                    headers: { 'Content-Type' : 'application/json', mode:'cors' },
+                    headers: { 
+                        'Content-Type' : 'application/json',
+                        'Access-Control-Allow-Credentials' : true
+                    },
                     withCredentials: false
                 }
             );
 
             if (response.data.errorMessage) {
-                console.log(response.data.errorMessage);
                 setErrorMessage(response.data.errorMessage);
                 setShowErrorToast(true);
                 setEmail('');
@@ -64,16 +64,15 @@ const Login = () => {
             }
 
             else {
-                const accessToken = response?.data?.accessToken;
-                const roles = response?.data.roles;
-                setAuth({ user: email, password, roles, accessToken });
+                // Upon successful authentication, set JWT in localstorage -> Not very secure, look into other options down the road.
+                console.log(response.data.token.token);
+                localStorage.setItem('jwt', response.data.token.token);
                 navigate('/user/profile');
             }
             
         }
 
         catch (error) {
-            console.log(error.response.data);
             if (!error?.response) {
                 setErrorMessage("There is an issue on our part, try again later.");
             }

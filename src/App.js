@@ -11,6 +11,7 @@ import Profile from './components/Pages/Profile';
 import Container from "react-bootstrap/Container";
 
 function App() {
+
   return (
 
     <Container className="App d-flex justify-content-center mt-2">
@@ -41,7 +42,7 @@ function App() {
             element = {
               <Profile />
             }
-          />
+          /> 
 
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,5 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
 import axios from "axios";
 
 // Bootstrap Components.
@@ -12,8 +11,6 @@ const SIGNUP_URL_ENDPOINT = 'http://localhost:3000/auth/register';
 const SignUp = () => {
 
     const navigate = useNavigate();
-
-    const { setAuth } = useContext(AuthContext);
 
     const userRef = useRef();
     const firstNameRef = useRef();
@@ -47,9 +44,7 @@ const SignUp = () => {
                     withCredentials: false
                 }
             );
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data.roles;
-            setAuth({ user: email, password, roles, accessToken });
+
             setFirstName('');
             setEmail('');
             setPassword('');
