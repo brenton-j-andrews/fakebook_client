@@ -6,13 +6,13 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Toast from "react-bootstrap/Toast";
+import { Container, Row, Col } from "react-bootstrap";
 
 const LOGIN_URL_ENDPOINT = 'http://localhost:3000/auth/login';
 
 const Login = () => {
 
     const navigate = useNavigate();
-
 
     const userRef = useRef();
     const errorRef = useRef();
@@ -56,7 +56,8 @@ const Login = () => {
                 }
             );
 
-            if (response.data.errorMessage) {
+            // Check for failed validation in response.
+            if (!response.data.success) {
                 setErrorMessage(response.data.errorMessage);
                 setShowErrorToast(true);
                 setEmail('');
@@ -65,7 +66,6 @@ const Login = () => {
 
             else {
                 // Upon successful authentication, set JWT in localstorage -> Not very secure, look into other options down the road.
-                console.log(response.data.token.token);
                 localStorage.setItem('jwt', response.data.token.token);
                 navigate('/user/profile');
             }
@@ -77,71 +77,78 @@ const Login = () => {
                 setErrorMessage("There is an issue on our part, try again later.");
             }
 
+            console.log(error);
             setErrorMessage("Error: " + error.message);
-            errorRef.current.focus();
         }
     }
  
     return (
-        <section className="d-flex flex-column align-items-center border border-dark rounded pt-3 p-2">
+        <section className="login container d-flex justify-content-center mt-5 pt-5 pb-2">
 
-            <Toast 
-                className="d-flex flex-column align-items-center text-light bg-danger mb-4 p-2"
-                show={showErrorToast} 
-                onClose={toggleToast}
-            > 
-                <Toast.Header className="container-fluid rounded">
-                    <strong className="me-auto">Error: </strong>
-                </Toast.Header>
-                <Toast.Body> {errorMessage} </Toast.Body>
-            </Toast>
+            <Row>
+                <Col className="d-flex flex-column justify-content-center mt-5" md={6}>
+                    <h1 className="logo-font"> Fakebook </h1>
+                    <p className="fs-5 pe-5"> Connect with absolutely nobody online since this is a portfolio project. </p>
+                </Col>
 
-            <h1> Fakebook </h1>
+                <Col className="d-flex-column shadow-lg rounded bg-light mt-5 py-3" md={6}>
 
-            <Form className="d-flex flex-column credential-form mt-3" 
-            onSubmit={handleSubmit}
-            >
-                <Form.Group>
-                    <Form.Label> Email: </Form.Label>
-                    <Form.Control 
-                        className="border-top mb-2"
-                        type="text"
-                        id="email"
-                        ref={userRef}
-                        onChange={(e) => setEmail(e.target.value)}
-                        autoComplete="off"
-                        value={email}
-                        required
-                    />
-                </Form.Group>
+                    <Toast 
+                        className="d-flex flex-column align-items-center text-light bg-danger mb-4 p-2"
+                        show={showErrorToast} 
+                        onClose={toggleToast}
+                    > 
+                        <Toast.Header className="container-fluid rounded">
+                            <strong className="me-auto">Error: </strong>
+                        </Toast.Header>
+                        <Toast.Body> {errorMessage} </Toast.Body>
+                    </Toast>
 
-                <Form.Group>
-                    <Form.Label> Password: </Form.Label>
-                    <Form.Control 
-                        className="mb-2"
-                        type="password"
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                        required
-                    />
-                </Form.Group>
+                    <Form className="credential-form mt-3 p-2" 
+                    onSubmit={handleSubmit}
+                    >
+                        <Form.Group>
+                            <Form.Control 
+                                placeholder="Email"
+                                className="border-top mb-3 p-3"
+                                type="text"
+                                id="email"
+                                ref={userRef}
+                                onChange={(e) => setEmail(e.target.value)}
+                                autoComplete="off"
+                                value={email}
+                                required
+                            />
+                        </Form.Group>
 
-                <Button 
-                    className="align-self-center container-fluid mt-3 mb-3" 
-                    ariant="primary" 
-                    type="submit"
-                > 
-                    Log In    
-                </Button>
-            </Form>
+                        <Form.Group>
+                            <Form.Control 
+                                placeholder="Password"
+                                className="mb-2 p-3"
+                                type="password"
+                                id="password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                required
+                            />
+                        </Form.Group>
 
-            <div className="d-flex flex-column align-items-center mt-5">
-                <p className="m-0"> Not Registered? </p>
-                 <br />
-                <a href="/sign-up"><strong>Sign Up Here</strong></a>
-            </div>
+                        <Button 
+                            className="align-self-center container-fluid mt-3 mb-3" 
+                            variant="primary" 
+                            type="submit"
+                        > Log In    
+                        </Button>
+                    </Form>
 
+                    <div className="d-flex flex-column align-items-center">
+                        <p className="m-0"><strong>Not Registered?</strong></p>
+                        <br />
+                        <a href="/sign-up"><strong>Sign Up Here</strong></a>
+                    </div>
+                </Col>
+            </Row>
+        
         </section>
     )
 }

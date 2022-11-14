@@ -11,7 +11,8 @@ const Profile = () => {
     const getProfileData = () => {
         axios.get(PROFILE_URL_ENDPOINT, {
             headers: {
-                'Authorization' : localStorage.getItem('jwt')
+                'Authorization' : localStorage.getItem('jwt'),
+                'Content-Type': 'text/plain'
             }
         })
         .then((response) => {

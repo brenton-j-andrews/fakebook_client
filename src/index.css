@@ -12,9 +12,27 @@ code {
     monospace;
 }
 
+/* Custom Fonts */
+@font-face {
+  font-family: klavika-bold;
+  src: url("../assets/klavika-bold.otf");
+}
+
+.logo-font {
+  font-family: 'klavika-bold';
+}
+
+/* .header {
+  font-family: 'klavika-bold';
+} */
 
 /* Log-In / Sign-Up form styling. */
-
-.credential-form {
-  width: 400px;
+.App {
+  height: 100vh;
+  background-color: #F0F0F0;
 }
+
+
+/* .credential-form {
+  background-color: white;
+} */

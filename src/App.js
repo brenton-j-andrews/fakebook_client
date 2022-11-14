@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./components/Pages/Login";
 import SignUp from './components/Pages/SignUp';
 import Profile from './components/Pages/Profile';
+import NavbarBrand from './components/BootStrap/NavbarBrand';
 
 // Import Bootstrap components.
 import Container from "react-bootstrap/Container";
@@ -14,7 +15,9 @@ function App() {
 
   return (
 
-    <Container className="App d-flex justify-content-center mt-2">
+    <Container className="App d-flex-column justify-content-center p-0" fluid>
+
+      <NavbarBrand />
 
       <BrowserRouter basename='/'>
 
