@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 
+import NotificationsBar from "../NotificationsBar";
+
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/auth/protected';
 
 
@@ -29,10 +31,11 @@ const Profile = () => {
     getProfileData();
 
     return (
-        <section>
+        <section className="profile-page">
             {
                 auth ?
                 <div>
+                    <NotificationsBar />
                     <p> You are logged in! Welcome to your profile! </p>
                 </div>
 

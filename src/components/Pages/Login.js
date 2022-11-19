@@ -40,7 +40,7 @@ const Login = () => {
 
     const toggleToast = () => setShowErrorToast(false);
 
-    const handleSubmit = async (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
 
         try {
@@ -91,21 +91,19 @@ const Login = () => {
                     <p className="fs-5 pe-5"> Connect with absolutely nobody online since this is a portfolio project. </p>
                 </Col>
 
-                <Col className="d-flex-column shadow-lg rounded bg-light mt-5 py-3" md={6}>
-
+                <Col className="test d-flex flex-column shadow-lg rounded bg-light mt-5 py-3" md={6}>
                     <Toast 
                         className="d-flex flex-column align-items-center text-light bg-danger mb-4 p-2"
                         show={showErrorToast} 
                         onClose={toggleToast}
                     > 
                         <Toast.Header className="container-fluid rounded">
-                            <strong className="me-auto">Error: </strong>
+                            <strong className="me-auto">Error: {errorMessage} </strong>
                         </Toast.Header>
-                        <Toast.Body> {errorMessage} </Toast.Body>
                     </Toast>
 
                     <Form className="credential-form mt-3 p-2" 
-                    onSubmit={handleSubmit}
+                    onSubmit={handleLoginSubmit}
                     >
                         <Form.Group>
                             <Form.Control 

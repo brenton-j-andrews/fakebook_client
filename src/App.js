@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./components/Pages/Login";
 import SignUp from './components/Pages/SignUp';
 import Profile from './components/Pages/Profile';
-import NavbarBrand from './components/BootStrap/NavbarBrand';
+import NavbarBrand from './components/NavbarBrand';
 
 // Import Bootstrap components.
 import Container from "react-bootstrap/Container";
