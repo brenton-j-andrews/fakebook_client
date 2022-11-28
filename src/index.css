@@ -15,7 +15,7 @@ code {
 /* Custom Fonts */
 @font-face {
   font-family: klavika-bold;
-  src: url("../assets/klavika-bold.otf");
+  src: url("./assets/klavika-bold.otf");
 }
 
 .logo-font {
@@ -32,6 +32,9 @@ code {
   background-color: #F0F0F0;
 }
 
+.notifications-icon {
+  max-width: 15px;
+}
 
 /* .credential-form {
   background-color: white;

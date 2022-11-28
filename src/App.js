@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,45 +11,49 @@ import NavbarBrand from './components/NavbarBrand';
 // Import Bootstrap components.
 import Container from "react-bootstrap/Container";
 
+// Import Context.
+import { UserContext } from './context/UserContext.js';
+
+
 function App() {
 
+  const [ user, setUser ] = useState();
+
   return (
+    <UserContext.Provider value={[user, setUser]}>
+      <Container className="App d-flex-column justify-content-center p-0" fluid>
+        <NavbarBrand />
 
-    <Container className="App d-flex-column justify-content-center p-0" fluid>
+        <BrowserRouter basename='/'>
+          <Routes>
 
-      <NavbarBrand />
+            <Route path="/" 
+              element = {
+                <Login 
+                />
+              }
+            />
+              
+            <Route 
+              exact
+              path='/sign-up'
+              element = {
+                <SignUp />
+              }
+            />
 
-      <BrowserRouter basename='/'>
+            <Route 
+              exact
+              path='/user/profile'
+              element = {
+                <Profile />
+              }
+            /> 
 
-        <Routes>
-
-          <Route 
-            exact
-            path="/"
-            element= {
-              <Login />
-            }
-          />
-
-          <Route 
-            exact
-            path='/sign-up'
-            element = {
-              <SignUp />
-            }
-          />
-
-          <Route 
-            exact
-            path='/user/profile'
-            element = {
-              <Profile />
-            }
-          /> 
-
-        </Routes>
-      </BrowserRouter>
-    </Container>
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </UserContext.Provider>
   );
 }
 

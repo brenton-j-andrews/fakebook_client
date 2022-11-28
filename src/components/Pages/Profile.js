@@ -1,15 +1,19 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+
+import { UserContext } from "../../context/UserContext.js";
+
 
 import NotificationsBar from "../NotificationsBar";
 
-const PROFILE_URL_ENDPOINT = 'http://localhost:3000/auth/protected';
+const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
 
 const Profile = () => {
 
+    const [ user, setUser ] = useContext(UserContext);
     let [ auth, setAuth ] = useState(null);
- 
+
     const getProfileData = () => {
         axios.get(PROFILE_URL_ENDPOINT, {
             headers: {
@@ -36,7 +40,7 @@ const Profile = () => {
                 auth ?
                 <div>
                     <NotificationsBar />
-                    <p> You are logged in! Welcome to your profile! </p>
+                    <p> You are logged in user {user}! </p>
                 </div>
 
                 : 

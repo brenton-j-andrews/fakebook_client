@@ -22,11 +22,6 @@ const SignUp = () => {
     const [ password, setPassword ] = useState('');
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
-    const [ dateOfBirth, setDateOfBirth] = useState({
-        'day': null,
-        'month': null,
-        'year': null
-    });
 
     const [ errorMessage, setErrorMessage ] = useState('');
 
@@ -46,9 +41,9 @@ const SignUp = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post(
+            await axios.post(
                 SIGNUP_URL_ENDPOINT,
-                JSON.stringify({ firstName, email, password, dateOfBirth }),
+                JSON.stringify({ firstName, email, password }),
                 {
                     headers: { 'Content-Type' : 'application/json', mode:'cors' },
                     withCredentials: false
@@ -82,13 +77,11 @@ const SignUp = () => {
                 </Col>
             
 
-{/* 
-            <p ref={errorRef} className={ errorMessage ? 'errmsg' : 'offscreen' } aria-live="assertive">
-                {errorMessage}
-            </p> 
-            */}
-
                 <Col className="test d-flex flex-column shadow-lg rounded bg-light mt-5 py-3" md={6}> 
+                <p ref={errorRef} className={ errorMessage ? 'errmsg' : 'offscreen' } aria-live="assertive">
+                    {errorMessage}
+                </p> 
+
                     <Form className="d-flex flex-column credential-form mt-3" 
                     onSubmit={handleSubmit}
                     >
@@ -174,37 +167,3 @@ const SignUp = () => {
 }
 
 export default SignUp;
-
-{/* <p className="font-italic mt-3 mb-1">Birthday</p>
-    <Row>
-        <Col>
-            <Form.Group>
-                <Form.Control
-                placeholder="DD"
-                type="number"
-                id="dayOfBirth"
-                // onChange={(e) => setDayOfBirth(e.target.value)}
-                ></Form.Control>
-            </Form.Group>
-        </Col>
-        <Col>
-            <Form.Group>
-                <Form.Control
-                placeholder="MM"
-                type="number"
-                id="monthOfBirth"
-                // onChange={(e) => setMonthOfBirth(e.target.value)}
-                ></Form.Control>
-            </Form.Group>
-        </Col>
-        <Col>
-            <Form.Group>
-                <Form.Control
-                placeholder="YYYY"
-                type="number"
-                id="yearOfBirth"
-                // onChange={(e) => setYearOfBirth(e.target.value)}
-                ></Form.Control>
-            </Form.Group>
-        </Col>
-    </Row> */}

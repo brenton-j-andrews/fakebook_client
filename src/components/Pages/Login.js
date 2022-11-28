@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -6,23 +6,24 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Toast from "react-bootstrap/Toast";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { UserContext } from "../../context/UserContext.js";
 
 const LOGIN_URL_ENDPOINT = 'http://localhost:3000/auth/login';
 
 const Login = () => {
 
+    const [ user, setUser ] = useContext(UserContext);
+
     const navigate = useNavigate();
 
     const userRef = useRef();
-    const errorRef = useRef();
 
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
 
     const [ showErrorToast, setShowErrorToast ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState('');
-
 
     // Focus on user input on form.
     useEffect(() => { 
@@ -32,11 +33,6 @@ const Login = () => {
     // Re-render on change of errorMessage.
     useEffect(() => {
     }, [errorMessage]);
-
-    // Clear error messages on any form changes. LOOK INTO LATER! THIS IS CAUSING ERROR MESSAGE TO DISAPPEAR IMMEDIATELY.
-    // useEffect(() => {
-    //     setErrorMessage('');
-    // }, [ email, password ]);
 
     const toggleToast = () => setShowErrorToast(false);
 
@@ -65,8 +61,9 @@ const Login = () => {
             }
 
             else {
-                // Upon successful authentication, set JWT in localstorage -> Not very secure, look into other options down the road.
+                // Upon successful authentication, set JWT and User._id in localstorage -> Not very secure, look into other options down the road.
                 localStorage.setItem('jwt', response.data.token.token);
+                setUser(response.data.user._id);
                 navigate('/user/profile');
             }
             
@@ -84,7 +81,6 @@ const Login = () => {
  
     return (
         <section className="login container d-flex justify-content-center mt-5 pt-5 pb-2">
-
             <Row>
                 <Col className="d-flex flex-column justify-content-center mt-5" md={6}>
                     <h1 className="logo-font"> Fakebook </h1>
