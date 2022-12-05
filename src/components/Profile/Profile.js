@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Container, Row, Col } from "react-bootstrap";
 
 import NotificationsBar from "../NotificationsBar/NotificationsBar";
+import FriendDisplay from "./FriendDisplay";
 
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
@@ -9,12 +11,17 @@ const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 const Profile = () => {
 
     // const [ user, setUser ] = useContext(UserContext);
-    let [ auth, setAuth ] = useState(null);
+    let currentUser = localStorage.getItem('user_id');
 
-    const getProfileData = () => {
+    let [ auth, setAuth ] = useState(null);
+    let [ userData, setUserData ] = useState();
+
+    // Fetch currentUser information.
+    useEffect(() => {
+        console.log(currentUser);
         axios.get(PROFILE_URL_ENDPOINT, {
-            headers: {
-                'UserID' : localStorage.getItem('user_id'),
+            headers : {
+                'UserID' : currentUser,
                 'Authorization' : localStorage.getItem('jwt'),
                 'Content-Type': 'text/plain'
             }
@@ -22,27 +29,43 @@ const Profile = () => {
         .then((response) => {
             if(response.status === 200) {
                 setAuth(true);
+                setUserData(response.data);
+                console.log(response);
             }
         })
         .catch((error) => {
             setAuth(false);
             console.log(error.response);
         })
-    }
-    
-    let name = localStorage.getItem('user_id');
-    getProfileData();
-
+    }, [currentUser])
+      
     return (
         <section className="profile-page">
             {
                 auth ?
-                <div>
+
+                <div className="d-flex-column"> 
                     <NotificationsBar />
-                    <p> You are logged in user {name}! </p>
+                    <div className="profile-header d-flex justify-content-center border border-dark">
+                        <h2> {userData.fullName} </h2>
+                    </div>
+
+                    <Container className="profile-main" fluid>
+                        <Row className="m-0 p-0">
+                            <Col sm={12} md={4} className="d-flex flex-column justify-content-center align-items-center">
+                                <div> User Data </div>
+                                <FriendDisplay userFriends = {userData.friends}/>
+                            </Col>
+                            <Col sm={12} md={8} className="d-flex justify-content-center"> Yours posts in this column </Col>
+                        </Row>
+                    </Container>
                 </div>
 
+
+
+
                 : 
+
 
                 <div>
                     <p> You are not authorized to see this page, log in to access. </p> 
