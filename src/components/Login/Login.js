@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -7,13 +7,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Toast from "react-bootstrap/Toast";
 import { Row, Col } from "react-bootstrap";
-import { UserContext } from "../../context/UserContext.js";
 
 const LOGIN_URL_ENDPOINT = 'http://localhost:3000/auth/login';
 
 const Login = () => {
 
-    const [ user, setUser ] = useContext(UserContext);
+    // const [ user, setUser ] = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -61,10 +60,11 @@ const Login = () => {
             }
 
             else {
-                // Upon successful authentication, set JWT and User._id in localstorage -> Not very secure, look into other options down the road.
+                // Upon successful authentication, set JWT, and User._id in localstorage, set user data in application state 
+                // -> Not very secure, look into other options down the road.
                 localStorage.setItem('jwt', response.data.token.token);
-                setUser(response.data.user._id);
-                navigate('/user/profile');
+                localStorage.setItem('user_id', response.data.user._id);
+                navigate(`${response.data.user._id}/profile`);
             }
             
         }

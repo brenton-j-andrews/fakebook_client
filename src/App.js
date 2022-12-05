@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import my components.
-import Login from "./components/Pages/Login";
-import SignUp from './components/Pages/SignUp';
-import Profile from './components/Pages/Profile';
-import NavbarBrand from './components/NavbarBrand';
+import Login from "./components/Login/Login";
+import SignUp from './components/SignUp/SignUp';
+import Profile from './components/Profile/Profile';
+import NavbarBrand from './components/NotificationsBar/NavbarBrand';
 
 // Import Bootstrap components.
 import Container from "react-bootstrap/Container";
@@ -17,6 +17,7 @@ import { UserContext } from './context/UserContext.js';
 
 function App() {
 
+  // Store user id. Merge with userData state below?
   const [ user, setUser ] = useState();
 
   return (
@@ -34,7 +35,7 @@ function App() {
               }
             />
               
-            <Route 
+            <Route
               exact
               path='/sign-up'
               element = {
@@ -44,9 +45,10 @@ function App() {
 
             <Route 
               exact
-              path='/user/profile'
+              path='/:id/profile'
               element = {
-                <Profile />
+                <Profile 
+                />
               }
             /> 
 

@@ -1,22 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
-import { UserContext } from "../../context/UserContext.js";
-
-
-import NotificationsBar from "../NotificationsBar";
+import NotificationsBar from "../NotificationsBar/NotificationsBar";
 
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
 
 const Profile = () => {
 
-    const [ user, setUser ] = useContext(UserContext);
+    // const [ user, setUser ] = useContext(UserContext);
     let [ auth, setAuth ] = useState(null);
 
     const getProfileData = () => {
         axios.get(PROFILE_URL_ENDPOINT, {
             headers: {
+                'UserID' : localStorage.getItem('user_id'),
                 'Authorization' : localStorage.getItem('jwt'),
                 'Content-Type': 'text/plain'
             }
@@ -31,7 +29,8 @@ const Profile = () => {
             console.log(error.response);
         })
     }
-       
+    
+    let name = localStorage.getItem('user_id');
     getProfileData();
 
     return (
@@ -40,7 +39,7 @@ const Profile = () => {
                 auth ?
                 <div>
                     <NotificationsBar />
-                    <p> You are logged in user {user}! </p>
+                    <p> You are logged in user {name}! </p>
                 </div>
 
                 : 

@@ -43,7 +43,7 @@ const SignUp = () => {
         try {
             await axios.post(
                 SIGNUP_URL_ENDPOINT,
-                JSON.stringify({ firstName, email, password }),
+                JSON.stringify({ firstName, lastName, email, password }),
                 {
                     headers: { 'Content-Type' : 'application/json', mode:'cors' },
                     withCredentials: false
@@ -51,6 +51,7 @@ const SignUp = () => {
             );
 
             setFirstName('');
+            setLastName('');
             setEmail('');
             setPassword('');
             navigate('/');

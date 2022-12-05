@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Select from 'react-select';
 import axios from "axios";
 
 
@@ -7,47 +6,22 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form"
 
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext.js";
+import { UserContext } from "../../context/UserContext.js";
 
-import message_icon from "../assets/Icons/comment.png";
+import message_icon from "../../assets/Icons/comment.png";
 
 const SEARCHBAR_URL_ENDPOINT = 'http://localhost:3000/user/profile/search';
 
-// For testing!!!
-const fake_accounts = [
-    {
-        label: 'Brenton',
-        value: 'Brenton'
-    },
-    {
-        label: 'Moose',
-        value: 'Moose'
-    },
-    {
-        label: 'Ginger',
-        value: 'Ginger'
-    },
-    {
-        label: 'Bruce',
-        value: 'Bruce'
-    }
-]
-
-
 function NotificationsBar() {
 
-    const [ user, setUser ] = useContext(UserContext);
-
-    let [ searchString, setSearchString ] = useState('');
+    // let [ searchString, setSearchString ] = useState('');
     let [ searchResult, setSearchResult ] = useState([]);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(searchResult);
     }, [searchResult]);
 
     const handleSearchBar = () => {
@@ -67,7 +41,7 @@ function NotificationsBar() {
 
     const handleLogOut = () => {
         localStorage.setItem('jwt', null);
-        setUser('');
+        localStorage.setItem('user_id', null);
         navigate('/');
     }
 
@@ -95,7 +69,7 @@ function NotificationsBar() {
                            {searchResult.map((item) => {
                                return (
                                    <div className='container-fluid bg-white' key={item.email}> 
-                                        <h3> {item.email} </h3> 
+                                        <span> {item.firstName} {item.lastName} </span> 
                                    </div>
                                )
                            })}
