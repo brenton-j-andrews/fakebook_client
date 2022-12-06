@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 
 import profileImage from "../../assets/defaultProfileImage.png";
 
 const FriendDisplay = ({ userFriends }) => {
-    
-    const toDisplay = ['Joe', 'Bruce', 'Ginger', 'Halo', 'Cocount', 'Nigel', 'Charlie', 'Moose', 'Brent'];
 
     const DisplayGrid = styled.div`
         display: grid;
@@ -16,6 +14,7 @@ const FriendDisplay = ({ userFriends }) => {
         margin-top: .25rem;
     `
 
+    // Load bearing code. Not used but 'rendered fewer hooks than expected' error pops up if removed...
     const DisplayTile = styled.div`
         position: relative;
         display: flex;
@@ -29,28 +28,26 @@ const FriendDisplay = ({ userFriends }) => {
             transition-duration: 500ms;
         }
     `
-    const TileImage = styled.img`
-        width: 100px;
-        height: 100px;
-    `
+    
 
-    const TileName = styled.p`
-        position: absolute;
-        bottom: -4px;
-    `
     return (
+
         <Container fluid>
             <strong> Friends ({userFriends.length}): </strong>
 
             <DisplayGrid>
-                {toDisplay.map((friend) => {
+
+                {userFriends.map((friend, index) => {
                     return (
-                        <DisplayTile key={friend}> 
-                            <TileImage src={profileImage} className="m-0 p-0"></TileImage>
-                            <TileName> {friend } </TileName>
-                        </DisplayTile>
+                        <Card className="d-flex flex-column align-items-center" key={index} onClick={() => {console.log('hello from there!');}}>
+                            <Card.Img variant='top' src={profileImage} />
+                            <Card.Body className='m-0 p-0'>
+                                <Card.Text> {friend} </Card.Text>
+                            </Card.Body>
+                        </Card>
                     )
                 })}
+
             </DisplayGrid>
         </Container>
     )

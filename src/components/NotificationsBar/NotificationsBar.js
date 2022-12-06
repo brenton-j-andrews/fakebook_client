@@ -1,4 +1,5 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, forwardRef} from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -7,10 +8,8 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
 
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext.js";
-
 import message_icon from "../../assets/Icons/comment.png";
+import SearchBarTile from './SearchBarTile.js';
 
 const SEARCHBAR_URL_ENDPOINT = 'http://localhost:3000/user/profile/search';
 
@@ -18,12 +17,15 @@ function NotificationsBar() {
 
     // let [ searchString, setSearchString ] = useState('');
     let [ searchResult, setSearchResult ] = useState([]);
+    let [ openSearch, setOpenSearch ] = useState("");
 
     const navigate = useNavigate();
 
     useEffect(() => {
     }, [searchResult]);
 
+    
+    // Handle search bar input, add event to close results panel on clicking outside of it.
     const handleSearchBar = () => {
         axios.get(SEARCHBAR_URL_ENDPOINT , {
             headers: {
@@ -61,16 +63,16 @@ function NotificationsBar() {
                        <input 
                        type="text"
                        onClick={(e) => {handleSearchBar()}}
-                       onBlur={() => {setSearchResult([])}}
+                    //    onBlur={() => {setSearchResult([])}}
                        placeholder='Search Fakebook here!'
                        />
 
-                       <div className='search-result container-fluid position-absolute overflow-visible'>
+                       <div className='search-result container-fluid position-absolute overflow-visible bg-white' >
                            {searchResult.map((item) => {
                                return (
-                                   <div className='container-fluid bg-white' key={item.email}> 
-                                        <span> {item.firstName} {item.lastName} </span> 
-                                   </div>
+                                 <SearchBarTile key={item._id}
+                                    userItem = {item}
+                                 />
                                )
                            })}
                        </div>

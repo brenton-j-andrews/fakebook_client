@@ -3,7 +3,8 @@ import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 
 import NotificationsBar from "../NotificationsBar/NotificationsBar";
-import FriendDisplay from "./FriendDisplay";
+import FriendDisplay from "../Friends/FriendDisplay";
+import SearchBarTile from "../NotificationsBar/SearchBarTile";
 
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
@@ -18,7 +19,6 @@ const Profile = () => {
 
     // Fetch currentUser information.
     useEffect(() => {
-        console.log(currentUser);
         axios.get(PROFILE_URL_ENDPOINT, {
             headers : {
                 'UserID' : currentUser,
@@ -61,11 +61,7 @@ const Profile = () => {
                     </Container>
                 </div>
 
-
-
-
                 : 
-
 
                 <div>
                     <p> You are not authorized to see this page, log in to access. </p> 
