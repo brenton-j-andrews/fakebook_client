@@ -4,7 +4,7 @@ import { Container, Card } from "react-bootstrap";
 
 import profileImage from "../../assets/defaultProfileImage.png";
 
-const FriendDisplay = ({ userFriends }) => {
+const FriendDisplay = ({ friends }) => {
 
     const DisplayGrid = styled.div`
         display: grid;
@@ -29,20 +29,19 @@ const FriendDisplay = ({ userFriends }) => {
         }
     `
     
-
     return (
 
         <Container fluid>
-            <strong> Friends ({userFriends.length}): </strong>
+            <strong> Friends ({friends.length}): </strong>
 
             <DisplayGrid>
 
-                {userFriends.map((friend, index) => {
+                {friends.map((friend, index) => {
                     return (
-                        <Card className="d-flex flex-column align-items-center" key={index} onClick={() => {console.log('hello from there!');}}>
+                        <Card className="d-flex flex-column align-items-center" key={index}>
                             <Card.Img variant='top' src={profileImage} />
                             <Card.Body className='m-0 p-0'>
-                                <Card.Text> {friend} </Card.Text>
+                                <Card.Text> {friend.fullName} </Card.Text>
                             </Card.Body>
                         </Card>
                     )

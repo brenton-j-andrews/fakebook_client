@@ -4,10 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 
 import NotificationsBar from "../NotificationsBar/NotificationsBar";
 import FriendDisplay from "../Friends/FriendDisplay";
-import SearchBarTile from "../NotificationsBar/SearchBarTile";
 
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
-
 
 const Profile = () => {
 
@@ -54,7 +52,7 @@ const Profile = () => {
                         <Row className="m-0 p-0">
                             <Col sm={12} md={4} className="d-flex flex-column justify-content-center align-items-center">
                                 <div> User Data </div>
-                                <FriendDisplay userFriends = {userData.friends}/>
+                                <FriendDisplay friends = {userData.friends}/>
                             </Col>
                             <Col sm={12} md={8} className="d-flex justify-content-center"> Yours posts in this column </Col>
                         </Row>

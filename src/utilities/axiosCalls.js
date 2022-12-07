@@ -1,1 +1,1 @@
-// File that contains API calls that are utilized by multiple components.
+// File that contains API call functions which are utilized by multiple components.

@@ -21,6 +21,7 @@ function App() {
   const [ user, setUser ] = useState();
 
   return (
+    
     <UserContext.Provider value={[user, setUser]}>
       <Container className="App d-flex-column justify-content-center p-0" fluid>
         <NavbarBrand />
