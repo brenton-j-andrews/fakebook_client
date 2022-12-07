@@ -7,6 +7,7 @@ import axios from "axios";
 
 const SEND_FRIEND_REQUEST_ENDPOINT = 'http://localhost:3000/user/friend_request';
 const ACCEPT_FRIEND_REQUEST_ENDPOINT = 'http://localhost:3000/user/accept_request';
+const DECLINE_FRIEND_REQUEST_ENDPOINT = 'http://localhost:3000/user/decline_request';
 const UNFRIEND_USER_ENDPOINT = 'http://localhost:3000/user/unfriend_user';
 
 const SearchBarTile = ({ userItem }) => {
@@ -31,6 +32,19 @@ const SearchBarTile = ({ userItem }) => {
         axios.put(ACCEPT_FRIEND_REQUEST_ENDPOINT, {
             'recipient_id' : localStorage.getItem('user_id'),
             'sender_id' : userItem._id
+        })
+        .then((response) => {
+            console.log(response.data.message);
+        })
+        .catch((error) => {
+            console.log('error: ', error.response.data.message);
+        })
+    }
+
+    const declineFriendRequest = () => {
+        axios.put(DECLINE_FRIEND_REQUEST_ENDPOINT, {
+            'recipientID' : localStorage.getItem('user_id'),
+            'senderID': userItem._id
         })
         .then((response) => {
             console.log(response.data.message);
@@ -80,10 +94,12 @@ const SearchBarTile = ({ userItem }) => {
         return (
             <div> 
                 { userItem.fullName } 
-                <button onClick={() => {acceptFriendRequest(userItem)}} > Confirm Friend Request </button>
+                <button onClick={() => {acceptFriendRequest(userItem)}} > Accept Friend Request </button>
+                <button onClick={() => {declineFriendRequest(userItem)}} >  Reject Friend Request </button>
             </div>
         )
     }
+    
     else {
         return (
             <div> 
