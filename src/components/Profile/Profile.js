@@ -28,12 +28,10 @@ const Profile = () => {
             if(response.status === 200) {
                 setAuth(true);
                 setUserData(response.data);
-                console.log(response);
             }
         })
         .catch((error) => {
             setAuth(false);
-            console.log(error.response);
         })
     }, [currentUser])
       
@@ -54,7 +52,7 @@ const Profile = () => {
                                 <div> User Data </div>
                                 <FriendDisplay friends = {userData.friends}/>
                             </Col>
-                            <Col sm={12} md={8} className="d-flex justify-content-center"> Yours posts in this column </Col>
+                            <Col sm={12} md={8} className="d-flex justify-content-center bg-dark"> Yours posts in this column </Col>
                         </Row>
                     </Container>
                 </div>

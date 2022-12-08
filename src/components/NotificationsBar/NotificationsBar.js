@@ -67,7 +67,7 @@ function NotificationsBar() {
                        placeholder='Search Fakebook here!'
                        />
 
-                       <div className='search-result container-fluid position-absolute overflow-visible bg-white' >
+                       <div className='search-result container-fluid position-absolute overflow-visible bg-white py-3' >
                            {searchResult.map((item) => {
                                return (
                                  <SearchBarTile key={item._id}

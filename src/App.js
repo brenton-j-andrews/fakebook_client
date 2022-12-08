@@ -53,6 +53,15 @@ function App() {
               }
             /> 
 
+            <Route
+              exact
+              path='/:id/visit/:friend_id'
+              element = {
+                <Profile 
+                />
+              }
+            />
+
           </Routes>
         </BrowserRouter>
       </Container>

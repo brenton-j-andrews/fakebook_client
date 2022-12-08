@@ -1,6 +1,6 @@
-// Contains functions used for friend CRUD which are utilized by multiple components.
-import axios from "axios";
+// Contains functions used for friend CRUD API calls which are utilized by multiple components.
 
+import axios from "axios";
 
 const SEND_FRIEND_REQUEST_ENDPOINT = 'http://localhost:3000/user/friend_request';
 const ACCEPT_FRIEND_REQUEST_ENDPOINT = 'http://localhost:3000/user/accept_request';

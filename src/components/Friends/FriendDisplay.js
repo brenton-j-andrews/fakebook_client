@@ -14,20 +14,7 @@ const FriendDisplay = ({ friends }) => {
         margin-top: .25rem;
     `
 
-    // Load bearing code. Not used but 'rendered fewer hooks than expected' error pops up if removed...
-    const DisplayTile = styled.div`
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100px;
-        height: 100px;
 
-        &:hover {
-            transform: scale(1.025);
-            transition-duration: 500ms;
-        }
-    `
     
     return (
 
