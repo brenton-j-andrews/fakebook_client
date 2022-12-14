@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, forwardRef} from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 
 import Navbar from "react-bootstrap/Navbar";
@@ -9,37 +8,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
 
 import message_icon from "../../assets/Icons/comment.png";
-import SearchBarTile from './SearchBarTile.js';
+import { LiveSearch } from './LiveSearch';
 
-const SEARCHBAR_URL_ENDPOINT = 'http://localhost:3000/user/profile/search';
 
 function NotificationsBar() {
 
-    // let [ searchString, setSearchString ] = useState('');
-    let [ searchResult, setSearchResult ] = useState([]);
-    let [ openSearch, setOpenSearch ] = useState("");
-
     const navigate = useNavigate();
-
-    useEffect(() => {
-    }, [searchResult]);
-
-    
-    // Handle search bar input, add event to close results panel on clicking outside of it.
-    const handleSearchBar = () => {
-        axios.get(SEARCHBAR_URL_ENDPOINT , {
-            headers: {
-                'Authorization' : localStorage.getItem('jwt'),
-                'Content-Type': 'text/plain'
-            }
-        })
-        .then((response) => {
-            setSearchResult(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-    }
 
     const handleLogOut = () => {
         localStorage.setItem('jwt', null);
@@ -58,25 +32,7 @@ function NotificationsBar() {
 
                 <Container className="d-flex justify-content-end align-items-center mx-2">
 
-                    
-                   <div className='position-relative'>
-                       <input 
-                       type="text"
-                       onClick={(e) => {handleSearchBar()}}
-                    //    onBlur={() => {setSearchResult([])}}
-                       placeholder='Search Fakebook here!'
-                       />
-
-                       <div className='search-result container-fluid position-absolute overflow-visible bg-white py-3' >
-                           {searchResult.map((item) => {
-                               return (
-                                 <SearchBarTile key={item._id}
-                                    userItem = {item}
-                                 />
-                               )
-                           })}
-                       </div>
-                   </div>
+                    <LiveSearch />
 
                     <Nav.Link className="text-light ms-4" href="/user/profile"><strong> Wall </strong></Nav.Link>
                     <Nav.Link className="text-light" href="/user/profile"><strong> Profile </strong></Nav.Link>
@@ -85,6 +41,7 @@ function NotificationsBar() {
                         <NavDropdown.Item href="action2"> Change Password </NavDropdown.Item>
                         <NavDropdown.Item href="action3"> Delete Account </NavDropdown.Item>
                     </NavDropdown>
+
                 </Container>
             </Nav>
         </Navbar>

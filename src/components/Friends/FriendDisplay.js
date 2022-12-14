@@ -14,15 +14,11 @@ const FriendDisplay = ({ friends }) => {
         margin-top: .25rem;
     `
 
-
-    
     return (
-
         <Container fluid>
             <strong> Friends ({friends.length}): </strong>
 
             <DisplayGrid>
-
                 {friends.map((friend, index) => {
                     return (
                         <Card className="d-flex flex-column align-items-center" key={index}>

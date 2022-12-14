@@ -1,9 +1,9 @@
 /* 
 This component displays individual search results (for users) underneath the search bar.
 Functionality: sending / confirming friend requests and visiting user profile.
+TODO: Probably a much better way to implement this, rather than a bunch of if statements -> Try to optimize later???
 */
 
-import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
 import { 
@@ -20,7 +20,6 @@ const SearchBarTile = ({ userItem: userObject }) => {
     const Tile = styled.div`
         display: flex;
         align-items: center;
-        border: 3px solid black;
         height: 75px;
     `
     const TileImage = styled.img`
