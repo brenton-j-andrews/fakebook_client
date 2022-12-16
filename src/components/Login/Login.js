@@ -1,3 +1,8 @@
+/* 
+    User login component.
+    TODO: Add verification and do a dive into react useAuthContext because I don't really understand it.
+*/
+
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

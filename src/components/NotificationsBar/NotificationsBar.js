@@ -1,15 +1,19 @@
+/* 
+The NotificationsBar component contains user notifications (friend requests, notifications, messages), the LiveSearch component,
+an account actions dropdown,and links to view user profile and wall. Appears on every page if user is signed in.
+*/
+
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from "react-bootstrap/Container";
 
-import message_icon from "../../assets/Icons/comment.png";
 import { LiveSearch } from './LiveSearch';
 
+import message_icon from "../../assets/Icons/comment.png";
 
 function NotificationsBar() {
 

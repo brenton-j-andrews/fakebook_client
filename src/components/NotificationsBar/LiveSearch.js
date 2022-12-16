@@ -1,6 +1,6 @@
 /* 
-This component contains the app search bar, makes call to API for fetching search results, and renders 
-search results via the SearchResults component.
+    This component contains the app search bar, call the API to fetch search results, and renders search results via the SearchBarTile component.
+    Made as a class component to get a refresher.
 */
 
 import React from 'react';
@@ -20,7 +20,6 @@ export class LiveSearch extends React.Component {
             searchData: []
         };
 
-        this.searchInput = '';
         this.inputClickHandler = this.inputClickHandler.bind(this);
         this.fetchSearchData = this.fetchSearchData.bind(this);
         this.onInputChage = this.onInputChage.bind(this);
@@ -44,11 +43,15 @@ export class LiveSearch extends React.Component {
         })
     }
 
+    // Update searchInput state value and call fetchSearchData for filtered user search. 
+    // TODO: Sine setState is async, the body passed to API lags by a word. Try fixing later.
     onInputChage(event) {
         this.setState({ searchInput : event.target.value });
         this.fetchSearchData();
      }
  
+    // Triggers on clicking the search input bar. By default, will return all users in database. 
+    // TODO: In API, limit number of users returned to a max of 10. Maybe some way to randomize?
     inputClickHandler() {
         this.setState({ showSearchData : true });
         this.fetchSearchData();
@@ -59,8 +62,9 @@ export class LiveSearch extends React.Component {
             return (
                 <div className='info-box position-relative'>
                     <input
+                        className='w-100'
                         type="text"
-                        value={this.state.searchInput}
+                        value={''}
                         onChange={(e) => {this.onInputChage(e)}}
                         placeholder='Search Fakebook here!'
                         onClick={this.inputClickHandler}
@@ -74,7 +78,7 @@ export class LiveSearch extends React.Component {
                 <input
                     className='w-100'
                     type="text"
-                    value={this.statesearchInput}
+                    value={this.state.searchInput || ''}
                     onChange={(e) => {this.onInputChage(e)}}
                     placeholder='Search Fakebook here!'
                 />

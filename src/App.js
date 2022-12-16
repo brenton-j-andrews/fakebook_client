@@ -17,7 +17,6 @@ import { UserContext } from './context/UserContext.js';
 
 function App() {
 
-  // Store user id. Merge with userData state below?
   const [ user, setUser ] = useState();
 
   return (

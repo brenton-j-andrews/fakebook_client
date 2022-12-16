@@ -1,3 +1,9 @@
+/* 
+    The SignUp component contains the new user sign up form. 
+    TODO: Add form verification on client and server (are both neccessary?).
+    TODO: Add a button that logs visitors in on a 'guest' account which will not have post / comment privilages. 
+*/
+
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
