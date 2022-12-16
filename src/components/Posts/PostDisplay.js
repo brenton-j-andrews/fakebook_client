@@ -4,3 +4,14 @@
     The CommentForm and CommentDisplay componenets will both be rendered below each PostDisplay render.
 */
 
+const PostDisplay = ({ username, post }) => {
+    return (
+        <div className="d-flex flex-column bg-light m-1 border border-dark w-50">
+            <p> { username } </p>
+            <p> { post.postContent } </p>
+
+        </div>
+    )
+}
+
+export default PostDisplay;

@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import NotificationsBar from "../NotificationsBar/NotificationsBar";
 import FriendDisplay from "../Friends/FriendDisplay";
 import PostForm from "../Posts/PostForm";
+import PostDisplay from "../Posts/PostDisplay";
 
 const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
@@ -34,7 +35,7 @@ const Profile = () => {
         .catch((error) => {
             setAuth(false);
         })
-    }, [currentUser])
+    }, [currentUser, userData])
       
     return (
         <section className="profile-page">
@@ -56,6 +57,16 @@ const Profile = () => {
                             <Col sm={12} md={8} className="d-flex flex-column justify-content-center"> 
                                 Yours posts in this column 
                                 <PostForm />
+
+                                { userData.userPosts.map((post, index) => {
+                                    return (
+                                        <PostDisplay 
+                                            key={index}
+                                            username={userData.fullName} 
+                                            post={post}
+                                        />
+                                    )
+                                })}
                             </Col>
                         </Row>
                     </Container>
