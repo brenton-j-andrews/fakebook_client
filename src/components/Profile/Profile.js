@@ -17,7 +17,10 @@ const Profile = () => {
     let [ auth, setAuth ] = useState(null);
     let [ userData, setUserData ] = useState();
 
-    // Fetch currentUser information.
+    // Set to true whenever profile data is modified to trigger a re-render.
+    let [ reRenderProfile, setReRenderProfile ] = useState(false);
+    
+    // Fetch profile data, re-render on any profile changes (post CRUD, information update).
     useEffect(() => {
         axios.get(PROFILE_URL_ENDPOINT, {
             headers : {
@@ -26,17 +29,13 @@ const Profile = () => {
                 'Content-Type': 'text/plain'
             }
         })
-        .then((response) => {
-            if(response.status === 200) {
-                setAuth(true);
-                setUserData(response.data);
-            }
+        .then(response => {
+            setUserData(response.data);
+            setReRenderProfile(false);
+            setAuth(true);
         })
-        .catch((error) => {
-            setAuth(false);
-        })
-    }, [currentUser, userData])
-      
+    }, [ reRenderProfile, currentUser ]);
+    
     return (
         <section className="profile-page">
             {
@@ -56,14 +55,18 @@ const Profile = () => {
                             </Col>
                             <Col sm={12} md={8} className="d-flex flex-column justify-content-center"> 
                                 Yours posts in this column 
-                                <PostForm />
+                                <PostForm 
+                                    setReRenderProfile = {setReRenderProfile}
+                                />
 
                                 { userData.userPosts.map((post, index) => {
                                     return (
                                         <PostDisplay 
                                             key={index}
+                                            info={userData}
                                             username={userData.fullName} 
                                             post={post}
+                                            setReRenderProfile={setReRenderProfile}
                                         />
                                     )
                                 })}

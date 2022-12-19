@@ -11,7 +11,7 @@ import Form from 'react-bootstrap/Form'
 
 const CREATE_POST_ENDPOINT = 'http://localhost:3000/post/create_post';
 
-const PostForm = () => {
+const PostForm = ({ setReRenderProfile }) => {
 
     let [ postContent, setPostContent ] = useState('');
 
@@ -31,7 +31,7 @@ const PostForm = () => {
                     withCredentials: false
                 }
             );
-
+            setReRenderProfile(true);
             setPostContent('');
         }
 
