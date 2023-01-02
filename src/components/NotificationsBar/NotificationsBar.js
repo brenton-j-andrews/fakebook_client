@@ -26,7 +26,7 @@ function NotificationsBar() {
     }
 
     return (
-        <Navbar className="notifications border-top border-white bg-primary m-0 p-0">
+        <Navbar className="primary-blue notifications">
             
             <Nav className="d-flex justify-content-between container-fluid m-0 p-0">
 

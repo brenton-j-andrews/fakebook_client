@@ -43,7 +43,7 @@ const PostForm = ({ setReRenderProfile }) => {
 
     return (
         <div>
-            <Form className="bg-light w-50" onSubmit={handlePostSubmit}> 
+            <Form className="bg-light" onSubmit={handlePostSubmit}> 
                 <Form.Group>
                     <Form.Control 
                         type='text' 

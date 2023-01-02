@@ -49,12 +49,14 @@ const Profile = () => {
 
                     <Container className="profile-main" fluid>
                         <Row className="m-0 p-0">
+
                             <Col sm={12} md={4} className="d-flex flex-column align-items-center align-items-center">
                                 <div> User Data </div>
                                 <FriendDisplay friends = {userData.friends}/>
                             </Col>
-                            <Col sm={12} md={8} className="d-flex flex-column justify-content-center"> 
-                                Yours posts in this column 
+
+                            <Col sm={12} md={8} className="d-flex flex-column justify-content-center align-items-center"> 
+                            
                                 <PostForm 
                                     setReRenderProfile = {setReRenderProfile}
                                 />

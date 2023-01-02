@@ -22,9 +22,10 @@ code {
   font-family: 'klavika-bold';
 }
 
-/* .header {
-  font-family: 'klavika-bold';
-} */
+:root {
+  --primary-fb-blue: #4267B2;
+  --primary-fb-grey: #898F9C;
+}
 
 /* Log-In / Sign-Up form styling. */
 .App {
@@ -36,6 +37,20 @@ code {
   max-width: 15px;
 }
 
-/* .credential-form {
-  background-color: white;
-} */
+.btn-primary-blue {
+  color: white;
+  background-color: var(--primary-fb-blue);
+}
+
+.btn-login {
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  margin: 1rem 0 1rem 0;
+  padding: .5rem;
+}
+
+.primary-blue {
+  color: white;
+  background-color: var(--primary-fb-blue);
+}

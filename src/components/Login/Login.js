@@ -103,7 +103,7 @@ const Login = () => {
                         </Toast.Header>
                     </Toast>
 
-                    <Form className="credential-form mt-3 p-2" 
+                    <Form className="d-flex flex-column mt-3 p-2" 
                     onSubmit={handleLoginSubmit}
                     >
                         <Form.Group>
@@ -132,12 +132,9 @@ const Login = () => {
                             />
                         </Form.Group>
 
-                        <Button 
-                            className="align-self-center container-fluid mt-3 mb-3" 
-                            variant="primary" 
-                            type="submit"
-                        > Log In    
-                        </Button>
+                        <button className="btn-primary-blue btn-login" type="submit"> 
+                            Log In   
+                        </button>
                     </Form>
 
                     <div className="d-flex flex-column align-items-center">
