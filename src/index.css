@@ -24,18 +24,26 @@ code {
 
 :root {
   --primary-fb-blue: #4267B2;
-  --primary-fb-grey: #898F9C;
+  --primary-fb-grey: #89a8F9C;
+  --primary-light-grey: 
 }
 
 /* Log-In / Sign-Up form styling. */
 .App {
   height: 100vh;
-  background-color: #F0F0F0;
+  background-color: #FFFFFF;
 }
 
 .notifications-icon {
   max-width: 15px;
 }
+
+/* CUSTOM COLORS FOR BOOTSTRAP OVERRIDE */
+.primary-blue {
+  background-color: var(--primary-fb-blue);
+}
+
+/* CUSTOM BUTTON CLASSES */
 
 .btn-primary-blue {
   color: white;
@@ -50,7 +58,36 @@ code {
   padding: .5rem;
 }
 
-.primary-blue {
-  color: white;
-  background-color: var(--primary-fb-blue);
+.btn-like-comment {
+  background-color: white;
+  color: var(--primary-fb-grey);
+  border: none;
+  font-size: 1.25rem;
 }
+
+.like-icon {
+  max-width: 50px;
+}
+
+.comment-icon {
+  max-width: 25px;
+  margin-right: .5rem;
+}
+
+/* CUSTOM FONT CLASSES FOR BOOTSTRAP OVERRIDE */
+.font-post-user {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.font-post-small {
+  font-size: .9rem;
+}
+
+.font-post-content {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+
+/* Nothing beats a parking lot beer after 6 hours of hiking for a single run (= */

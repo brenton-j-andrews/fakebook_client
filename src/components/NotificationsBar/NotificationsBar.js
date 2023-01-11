@@ -13,7 +13,7 @@ import Container from "react-bootstrap/Container";
 
 import { LiveSearch } from './LiveSearch';
 
-import message_icon from "../../assets/Icons/comment.png";
+import message_icon from "../../assets/Icons/comment_icon.png";
 
 function NotificationsBar() {
 

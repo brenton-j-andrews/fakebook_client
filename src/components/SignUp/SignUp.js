@@ -152,17 +152,10 @@ const SignUp = () => {
                             />
                         </Form.Group>
 
-                        {/* <Button 
-                            className="align-self-center container-fluid mt-3 mb-3" 
-                            ariant="primary" 
-                            type="submit"
-                            > 
-                            Sign Up  
-                        </Button> */}
-
                         <button className="btn-primary-blue btn-login" type="submit"> 
                            Sign Up
                         </button>
+                        
                     </Form>
 
                 <div className="d-flex flex-column align-items-center">
