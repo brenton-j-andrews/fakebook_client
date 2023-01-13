@@ -7,6 +7,9 @@
 import axios from "axios";
 import styled from "styled-components";
 
+import CommentForm from "./CommentForm";
+import CommentDisplay from "./CommentDisplay";
+
 const DELETE_POST_ENDPOINT = 'http://localhost:3000/post/delete_post';
 const LIKE_POST_ENDPOINT = 'http://localhost:3000/post/like_post';
 const UNLIKE_POST_ENDPOINT = 'http://localhost:3000/post/unlike_post';
@@ -114,9 +117,6 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                     <p className="font-post-small mb-2"> { post.postLikes.length } likes. </p> 
                 }
 
-
-
-
                 <p className="font-post-small mb-2"> { post.postComment.length } Comments </p>
             </PostActivityDisplay>
 
@@ -139,6 +139,21 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                     Comment
                 </button>
             </PostContentContainer>
+
+            <CommentForm 
+                postid = {post._id}
+                username = { username }
+                setReRenderProfile = {setReRenderProfile}
+            />
+
+            {post.postComment.map((comment) => {
+                return (
+                    <CommentDisplay 
+                        comment = {comment}
+                    />
+                )
+            })}
+
         </PostContainer>
     )
 }
