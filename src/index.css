@@ -67,7 +67,7 @@ code {
 
 .btn-like-post {
   background-color: white;
-  color: dimgray;
+  color: var(--primary-fb-blue);
   border: none;
   font-size: 1.25rem;
 }
@@ -162,12 +162,9 @@ code {
   border-bottom: none;
 }
 
-
-
 .post-comment-unit {
   display: flex;
   flex-direction: column;
-  margin: .25rem 0rem;
 }
 
 .comment-user-text {

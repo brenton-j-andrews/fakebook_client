@@ -74,18 +74,29 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                 }
 
                 { 
-                    post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length > 1 &&
+                    !post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length === 1 &&
+                    <p className="font-post-small mb-2"> 1 Like. </p> 
+                }
+
+                {
+                    !post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length > 1 &&
+                    <p className="font-post-small mb-2"> { post.postLikes.length - 1} Likes. </p> 
+                }
+
+                { 
+                    post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length === 2 &&
+                    <p className="font-post-small mb-2"> You and 1 other like this. </p> 
+                }
+
+                { 
+                    post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length > 2 &&
                     <p className="font-post-small mb-2"> You and { post.postLikes.length - 1 } others like this. </p> 
                 }
+
 
                 { 
                     post.postLikes.length === 0 &&
                     <p className="font-post-small mb-2"> No Likes. </p> 
-                }
-
-                { 
-                    !post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length > 0 &&
-                    <p className="font-post-small mb-2"> { post.postLikes.length } likes. </p> 
                 }
 
                 <p className="font-post-small mb-2"> { post.postComment.length } Comments </p>
@@ -121,10 +132,13 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             />
 
             <div className="post-comments-wrapper">
-                {post.postComment.map((comment) => {
+                {post.postComment.map((comment, index) => {
                     return (
                         <CommentDisplay 
+                            key = {index}
+                            postid = {post._id}
                             comment = {comment}
+                            setReRenderProfile = {setReRenderProfile}
                         />
                     )
                 })}
