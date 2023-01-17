@@ -9,9 +9,12 @@ import axios from "axios";
 import CommentForm from "./CommentForm";
 import CommentDisplay from "./CommentDisplay";
 
+import { formatDate } from '../../utilities/formatDate';
+
 const DELETE_POST_ENDPOINT = 'http://localhost:3000/post/delete_post';
 const LIKE_POST_ENDPOINT = 'http://localhost:3000/post/like_post';
 const UNLIKE_POST_ENDPOINT = 'http://localhost:3000/post/unlike_post';
+
 
 const PostDisplay = ({ username, post, setReRenderProfile }) => {
 
@@ -56,7 +59,7 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             
             <div className="post-upper-data d-flex flex-column justify-content-center mt-1 p-1">
                 <p className="font-post-user m-0"> { username } </p>
-                <p className="font-post-small m-0"> 3 hours ago </p>
+                <p className="font-post-small m-0"> {formatDate(post.createdAt, true)} </p>
             </div>
             
 

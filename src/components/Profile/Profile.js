@@ -30,6 +30,7 @@ const Profile = () => {
             }
         })
         .then(response => {
+            console.log(response.data);
             setUserData(response.data);
             setReRenderProfile(false);
             setAuth(true);

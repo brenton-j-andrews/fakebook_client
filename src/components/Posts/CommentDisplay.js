@@ -5,6 +5,8 @@
 
 import axios from 'axios';
 
+import { formatDate } from '../../utilities/formatDate';
+
 const LIKE_COMMENT_ENDPOINT = 'http://localhost:3000/post/like_comment';
 const UNLIKE_COMMENT_ENDPOINT = 'http://localhost:3000/post/unlike_comment';
 const DELETE_COMMENT_ENDPOINT = 'http://localhost:3000/post/delete_comment';
@@ -61,8 +63,12 @@ const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
 
     return (
         <div className="post-comment-unit mt-2 mb-1">
+                     
+            <p>
+                <strong className="comment-user-text mt-2 mx-1 p-0"> { comment.commentAuthorName } </strong> - <small>{ formatDate(comment.createdAt, false) } </small>
+            </p>
+ 
 
-            <strong className="comment-user-text mt-2 mx-1 p-0"> { comment.commentAuthorName } </strong>
 
             <p className="mx-1 mb-2 p-0"> { comment.comment } </p>
 
