@@ -42,8 +42,8 @@ const CommentForm = ({ postid, username, setReRenderProfile }) => {
 
     return (
 
-        <div className="post-comment-form">
-            <Form className="post-comment-form rounded-pill container-fluid" onSubmit={handleCommentSubmit}> 
+        <div className="post-comment-form mb-2">
+            <Form className="post-comment-form container-fluid" onSubmit={handleCommentSubmit}> 
                 <Form.Group>
                     <Form.Control 
                         type='text' 

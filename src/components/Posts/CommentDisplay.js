@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const LIKE_COMMENT_ENDPOINT = 'http://localhost:3000/post/like_comment';
 const UNLIKE_COMMENT_ENDPOINT = 'http://localhost:3000/post/unlike_comment';
-
+const DELETE_COMMENT_ENDPOINT = 'http://localhost:3000/post/delete_comment';
 
 const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
 
@@ -44,11 +44,24 @@ const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
     }
 
     const deleteComment = () => {
-        console.log(postid, comment._id)
+        setReRenderProfile(true);
+        axios.put(DELETE_COMMENT_ENDPOINT, 
+            {
+                'userid' : localStorage.getItem('user_id'),
+                'postid' : postid,
+                'commentid' : comment._id
+            })
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     return (
         <div className="post-comment-unit mt-2 mb-1">
+
             <strong className="comment-user-text mt-2 mx-1 p-0"> { comment.commentAuthorName } </strong>
 
             <p className="mx-1 mb-2 p-0"> { comment.comment } </p>
@@ -56,11 +69,11 @@ const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
             <div className="post-comment-likes mt-0 mb-3">
 
                 { comment.commentLikes.length > 1 && 
-                    <p className="mx-1"> { comment.commentLikes.length } likes </p>
+                    <p className="m-0"> { comment.commentLikes.length } likes </p>
                 }
 
                 { comment.commentLikes.length === 1 && 
-                    <p className="mx-1"> 1 like </p>
+                    <p className="m-0"> 1 like </p>
                 }
 
                 { comment.commentLikes.includes(localStorage.getItem('user_id')) ?

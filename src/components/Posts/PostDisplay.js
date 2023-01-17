@@ -48,7 +48,6 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             }, {
                 headers : headers
             })
-        .then(response => { console.log(response) });
     }
 
     return (
@@ -62,7 +61,7 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             
 
             <div className="post-content-display">
-                <p className="font-post-content mt-1"> { post.postContent } </p>
+                <p className="font-post-content mt-1 p-1"> { post.postContent } </p>
             </div>
 
             
@@ -134,6 +133,7 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             <div className="post-comments-wrapper">
                 {post.postComment.map((comment, index) => {
                     return (
+                        
                         <CommentDisplay 
                             key = {index}
                             postid = {post._id}
