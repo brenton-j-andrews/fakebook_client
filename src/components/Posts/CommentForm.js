@@ -5,7 +5,6 @@
 import axios from "axios";
 import { useState } from 'react';
 
-import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
 const ADD_COMMENT_ENDPOINT = 'http://localhost:3000/post/add_comment';
@@ -13,6 +12,7 @@ const ADD_COMMENT_ENDPOINT = 'http://localhost:3000/post/add_comment';
 const CommentForm = ({ postid, username, setReRenderProfile }) => {
 
     let [ commentContent, setCommentContent ] = useState('');
+    let [ showCommentButton, setShowCommentButton ] = useState(false);
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
@@ -41,21 +41,29 @@ const CommentForm = ({ postid, username, setReRenderProfile }) => {
     }
 
     return (
-        <div>
-            <Form className="bg-light" onSubmit={handleCommentSubmit}> 
+
+        <div className="post-comment-form">
+            <Form className="post-comment-form rounded-pill container-fluid" onSubmit={handleCommentSubmit}> 
                 <Form.Group>
                     <Form.Control 
                         type='text' 
                         placeholder="Leave a comment." 
+                        onFocus={() => {setShowCommentButton(true)}}
+                        onBlur={() => {setShowCommentButton(false)}}
                         value={commentContent}
-                        onChange={(e) => setCommentContent(e.target.value)}
+                        onChange={((e) => setCommentContent(e.target.value))}
                         required
                     />
 
-                    <Button variant='primary' type='submit'> Leave Comment </Button>
+                    {showCommentButton && 
+                        <button className="btn-primary-blue btn-add-comment" type="submit"> Leave Comment </button>
+                    }
+                    
+
                 </Form.Group>
             </Form>
         </div>
+
     )
 }
 

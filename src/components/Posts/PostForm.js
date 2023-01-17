@@ -42,21 +42,21 @@ const PostForm = ({ setReRenderProfile }) => {
     }
 
     return (
-        <div>
-            <Form className="bg-light" onSubmit={handlePostSubmit}> 
-                <Form.Group>
-                    <Form.Control 
-                        type='text' 
-                        placeholder="What is on your mind?" 
-                        value={postContent}
-                        onChange={(e) => setPostContent(e.target.value)}
-                        required
-                    />
+        <Form className="post-form" onSubmit={handlePostSubmit}> 
+            <Form.Group>
+                <Form.Control 
+                    as='textarea' 
+                    rows={3}
+                    placeholder='What is on your mind?'
+                    value={postContent}
+                    onChange={(e) => setPostContent(e.target.value)}
+                    required
+                />
 
-                    <Button variant='primary' type='submit'> Post </Button>
-                </Form.Group>
-            </Form>
-        </div>
+                <button type='submit' className='btn-primary-blue btn-add-post'> Post </button>
+
+            </Form.Group>
+        </Form>
     )
 }
 

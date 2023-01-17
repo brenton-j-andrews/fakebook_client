@@ -5,7 +5,6 @@
 */
 
 import axios from "axios";
-import styled from "styled-components";
 
 import CommentForm from "./CommentForm";
 import CommentDisplay from "./CommentDisplay";
@@ -52,51 +51,23 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
         .then(response => { console.log(response) });
     }
 
-    const PostContainer = styled.div`
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 50%;
-        background-color: #FFFFFF;
-        border: 1px solid gray;
-        margin-top: 25px;
-    `
-
-    const PostContentContainer = styled.div`
-        display: flex;
-        justify-content: space-between;
-        width: 90%;
-    `
-
-    const PostUserData = styled(PostContentContainer)`
-        display: flex;
-        align-items: center;
-    `
-
-    const PostActivityDisplay = styled(PostContentContainer)`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 3px solid grey;
-        margin-bottom: .5rem;
-    `
-    
     return (
 
-        <PostContainer>
-            <PostUserData>
-                <div className="d-flex flex-column justify-content-center p-1">
-                    <p className="font-post-user m-0"> { username } </p>
-                    <p className="font-post-small m-0"> 3 hours ago </p>
-                </div>
-            </PostUserData>
+        <div className="post-display-unit">
+            
+            <div className="post-upper-data d-flex flex-column justify-content-center mt-1 p-1">
+                <p className="font-post-user m-0"> { username } </p>
+                <p className="font-post-small m-0"> 3 hours ago </p>
+            </div>
+            
 
-            <PostContentContainer>
+            <div className="post-content-display">
                 <p className="font-post-content mt-1"> { post.postContent } </p>
-            </PostContentContainer>
+            </div>
 
-            <PostActivityDisplay>
+            
+            <div className='post-stats-display'>
+
                 { 
                     post.postLikes.includes(localStorage.getItem('user_id')) && post.postLikes.length === 1 &&
                     <p className="font-post-small mb-2"> You like this. </p> 
@@ -118,27 +89,30 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                 }
 
                 <p className="font-post-small mb-2"> { post.postComment.length } Comments </p>
-            </PostActivityDisplay>
+            </div>
 
-            <PostContentContainer>
+
+            <div className="post-interaction-display">
+
                 { post.postLikes.includes(localStorage.getItem('user_id')) ? 
 
-                    <button className="btn-like-comment mx-2" onClick={() => {unlikePost()}}>
+                    <button className="btn-like-post mx-2" onClick={() => {unlikePost()}}>
                         Unlike
                     </button>
 
                     :
 
-                    <button className="btn-like-comment mx-2" onClick={() => {likePost()}}>
+                    <button className="btn-like-post mx-2" onClick={() => {likePost()}}>
                         Like
                     </button>
                 }
                 
 
-                <button className="btn-like-comment mx-2">
+                <button className="btn-like-post mx-2">
                     Comment
                 </button>
-            </PostContentContainer>
+            </div>
+
 
             <CommentForm 
                 postid = {post._id}
@@ -146,15 +120,16 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                 setReRenderProfile = {setReRenderProfile}
             />
 
-            {post.postComment.map((comment) => {
-                return (
-                    <CommentDisplay 
-                        comment = {comment}
-                    />
-                )
-            })}
-
-        </PostContainer>
+            <div className="post-comments-wrapper">
+                {post.postComment.map((comment) => {
+                    return (
+                        <CommentDisplay 
+                            comment = {comment}
+                        />
+                    )
+                })}
+            </div>
+        </div>
     )
 }
 

@@ -24,7 +24,7 @@ code {
 
 :root {
   --primary-fb-blue: #4267B2;
-  --primary-fb-grey: #89a8F9C;
+  --primary-fb-grey: #F5F5F5;
   --primary-light-grey: 
 }
 
@@ -50,6 +50,13 @@ code {
   background-color: var(--primary-fb-blue);
 }
 
+.btn-add-comment {
+  border: none;
+  border-radius: 5px;
+  margin: 1rem 0 1rem 0;
+  padding: .5rem;
+}
+
 .btn-login {
   width: 100%;
   border: none;
@@ -58,11 +65,18 @@ code {
   padding: .5rem;
 }
 
-.btn-like-comment {
+.btn-like-post {
   background-color: white;
-  color: var(--primary-fb-grey);
+  color: dimgray;
   border: none;
   font-size: 1.25rem;
+}
+
+.btn-like-comment {
+  background-color: white;
+  color: var(--primary-fb-blue);
+  border: none;
+  font-size: 1rem;
 }
 
 .like-icon {
@@ -75,6 +89,7 @@ code {
 }
 
 /* CUSTOM FONT CLASSES FOR BOOTSTRAP OVERRIDE */
+
 .font-post-user {
   font-weight: bold;
   font-size: 1rem;
@@ -89,5 +104,79 @@ code {
   font-size: 1rem;
 }
 
+/* Profile page styling */
+.post-display-container {
+  background-color: var(--primary-fb-grey);
+  padding: 3rem;
+}
 
-/* Nothing beats a parking lot beer after 6 hours of hiking for a single run (= */
+.post-form {
+  background-color: white;
+  padding: 1rem;
+  width: 75%;
+} 
+
+.post-display-unit {
+  width: 75%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.post-display-unit > div {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.post-stats-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--primary-fb-grey);
+  margin-bottom: .5rem;
+}
+
+.post-interaction-display {
+  padding: .5rem 1rem 0rem 1rem;
+}
+
+.post-comment-form {
+  margin-top: .5rem;
+}
+
+.post-comments-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-comments-wrapper > div {
+  border-bottom: 3px solid var(--primary-fb-grey);
+}
+
+.post-comments-wrapper > div:last-child {
+  border-bottom: none;
+}
+
+
+
+.post-comment-unit {
+  display: flex;
+  flex-direction: column;
+  margin: .25rem 0rem;
+}
+
+.comment-user-text {
+  color: var(--primary-fb-blue);
+}
+
+.post-comment-likes {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-color: white;
+}
