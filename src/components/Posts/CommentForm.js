@@ -16,6 +16,7 @@ const CommentForm = ({ postid, username, setReRenderProfile }) => {
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
+        
         let  userID = localStorage.getItem('user_id')
 
         try {

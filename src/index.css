@@ -199,3 +199,22 @@ code {
     width: 90%;
   }
 }
+
+/* PROFILE - FRIENDS DISPLAY STYLING */
+.friends-display-grid {
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: .25rem;
+  margin-top: .25rem;
+}
+
+.friend-display-unit {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.friend-display-unit-image {
+  max-width: 100%;
+  max-height: 100%;
+}

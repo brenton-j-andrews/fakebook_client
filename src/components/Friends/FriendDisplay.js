@@ -2,7 +2,6 @@
 
 import { useNavigate } from "react-router-dom";
 
-import styled from 'styled-components';
 import { Container, Card } from "react-bootstrap";
 
 import profileImage from "../../assets/defaultProfileImage.png";
@@ -11,18 +10,11 @@ const FriendDisplay = ({ friends }) => {
 
     const navigate = useNavigate();
 
-    const DisplayGrid = styled.div`
-        display: grid;
-        grid-template-columns:  1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        gap: .25rem;
-        margin-top: .25rem;
-    `
-
     const navigateToFriendProfile = (id) => {
         if (id === localStorage.getItem('user_id')) {
             navigate(`/${localStorage.getItem('user_id')}/profile`);
-        } else {
+        } 
+        else {
             navigate(`/${localStorage.getItem('user_id')}/friend/${id}`);
         }
     }
@@ -32,24 +24,23 @@ const FriendDisplay = ({ friends }) => {
         <Container fluid>
             <strong> Friends ({friends.length}): </strong>
 
-            <DisplayGrid>
+            <div className="friends-display-grid">
                 {friends.map((friend, index) => {
 
                     return (
-                        <Card 
-                        className="d-flex flex-column align-items-center" 
-                        onClick={() => {navigateToFriendProfile(friend._id) }}
-                        key={index}>
-                            <Card.Img variant='top' src={profileImage} />
-                            <Card.Body className='m-0 p-0'>
-                                <Card.Text> {friend.fullName} </Card.Text>
-                            </Card.Body>
-                        </Card>
+                        <div 
+                        className="friend-display-unit"
+                        key={index}
+                        onClick={() => {navigateToFriendProfile(friend._id)}}
+                        > 
+                        <img className="friend-display-unit-image" src={profileImage} alt=""/>
+                        {friend.fullName}
+                        </div>
                     )
 
                 })}
 
-            </DisplayGrid>
+            </div>
         </Container>
     )
 }

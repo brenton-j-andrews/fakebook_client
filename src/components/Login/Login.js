@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // Bootstrap Components.
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Toast from "react-bootstrap/Toast";
 import { Row, Col } from "react-bootstrap";
@@ -64,7 +63,7 @@ const Login = () => {
 
             else {
                 // Upon successful authentication, set JWT, and User._id in localstorage, set user data in application state 
-                // -> Not very secure, look into other options down the road.
+                // NOT SECURE! Will be learning more about authentication and security in the future and then refactor.
                 localStorage.setItem('jwt', response.data.token.token);
                 localStorage.setItem('user_id', response.data.user._id);
                 navigate(`${response.data.user._id}/profile`);

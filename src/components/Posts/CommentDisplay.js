@@ -16,11 +16,13 @@ const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
     const likeComment = () => {
         setReRenderProfile(true);
         axios.put(LIKE_COMMENT_ENDPOINT, 
-            {
+
+            { 
                 'userid' : localStorage.getItem('user_id'),
                 'postid' : postid,
                 'commentid' : comment._id
             })
+            
         .then((response) => {
             console.log(response);
         })
