@@ -65,9 +65,12 @@ const Profile = () => {
                             {/* Post Display Section */}
                             <Col sm={12} md={8} className="post-display-container d-flex flex-column justify-content-center align-items-center"> 
                             
-                                <PostForm 
-                                    setReRenderProfile = {setReRenderProfile}
-                                />
+                                {friend_id  === undefined &&
+                                    <PostForm 
+                                        setReRenderProfile = {setReRenderProfile}
+                                    />
+                                }
+
 
                                 { userData.userPosts.map((post, index) => {
                                     return (

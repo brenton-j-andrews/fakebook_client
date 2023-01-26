@@ -20,8 +20,11 @@ const FriendDisplay = ({ friends }) => {
     `
 
     const navigateToFriendProfile = (id) => {
-        console.log(id);
-        navigate(`/${localStorage.getItem('user_id')}/friend/${id}`);
+        if (id === localStorage.getItem('user_id')) {
+            navigate(`/${localStorage.getItem('user_id')}/profile`);
+        } else {
+            navigate(`/${localStorage.getItem('user_id')}/friend/${id}`);
+        }
     }
 
     return (
