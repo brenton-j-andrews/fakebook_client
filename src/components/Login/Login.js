@@ -17,8 +17,6 @@ const LOGIN_URL_ENDPOINT = 'http://localhost:3000/auth/login';
 
 const Login = () => {
 
-    // const [ user, setUser ] = useContext(UserContext);
-
     const navigate = useNavigate();
 
     const userRef = useRef();

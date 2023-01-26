@@ -100,8 +100,14 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                     post.postLikes.length === 0 &&
                     <p className="font-post-small mb-2"> No Likes. </p> 
                 }
+                
+                {
+                    post.postComment.length === 1 ? 
+                    <p className="font-post-small mb-2"> 1 Comment </p> 
+                    :
+                    <p className="font-post-small mb-2"> { post.postComment.length } Comments </p>
+                }
 
-                <p className="font-post-small mb-2"> { post.postComment.length } Comments </p>
             </div>
 
 
@@ -134,6 +140,7 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
             />
 
             <div className="post-comments-wrapper">
+
                 {post.postComment.map((comment, index) => {
                     return (
                         
@@ -145,6 +152,7 @@ const PostDisplay = ({ username, post, setReRenderProfile }) => {
                         />
                     )
                 })}
+                
             </div>
         </div>
     )

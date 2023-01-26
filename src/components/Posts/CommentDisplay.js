@@ -62,10 +62,11 @@ const CommentDisplay = ({ postid, comment, setReRenderProfile }) => {
     }
 
     return (
+        
         <div className="post-comment-unit mt-2 mb-1">
                      
             <p>
-                <strong className="comment-user-text mt-2 mx-1 p-0"> { comment.commentAuthorName } </strong> - <small>{ formatDate(comment.createdAt, false) } </small>
+                <strong className="comment-user-text mt-2 mx-1 p-0"> { comment.commentAuthorName } </strong> <small> { formatDate(comment.createdAt, false) } </small>
             </p>
  
 

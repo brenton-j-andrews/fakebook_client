@@ -49,7 +49,7 @@ const CommentForm = ({ postid, username, setReRenderProfile }) => {
                         type='text' 
                         placeholder="Leave a comment." 
                         onFocus={() => {setShowCommentButton(true)}}
-                        onBlur={() => {setShowCommentButton(false)}}
+                        // onBlur={() => {setShowCommentButton(false)}}
                         value={commentContent}
                         onChange={((e) => setCommentContent(e.target.value))}
                         required

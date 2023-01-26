@@ -44,7 +44,7 @@ export class LiveSearch extends React.Component {
     }
 
     // Update searchInput state value and call fetchSearchData for filtered user search. 
-    // TODO: Sine setState is async, the body passed to API lags by a word. Try fixing later.
+    // TODO: Since setState is async, the body passed to API lags by a word. Try fixing later.
     onInputChage(event) {
         this.setState({ searchInput : event.target.value });
         this.fetchSearchData();

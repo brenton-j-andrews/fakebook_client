@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 
@@ -11,8 +12,8 @@ const PROFILE_URL_ENDPOINT = 'http://localhost:3000/user/profile';
 
 const Profile = () => {
 
-    // const [ user, setUser ] = useContext(UserContext);
     let currentUser = localStorage.getItem('user_id');
+    let { friend_id } = useParams();
 
     let [ auth, setAuth ] = useState(null);
     let [ userData, setUserData ] = useState();
@@ -25,25 +26,28 @@ const Profile = () => {
         axios.get(PROFILE_URL_ENDPOINT, {
             headers : {
                 'UserID' : currentUser,
+                'FriendID' : friend_id,
                 'Authorization' : localStorage.getItem('jwt'),
                 'Content-Type': 'text/plain'
             }
         })
         .then(response => {
-            console.log(response.data);
             setUserData(response.data);
             setReRenderProfile(false);
             setAuth(true);
         })
-    }, [ reRenderProfile, currentUser ]);
+    }, [ reRenderProfile, currentUser, friend_id ]);
     
     return (
         <section className="profile-page">
+
             {
                 auth ?
 
                 <div className="d-flex-column"> 
+
                     <NotificationsBar />
+
                     <div className="profile-header d-flex justify-content-center border border-dark">
                         <h2> {userData.fullName} </h2>
                     </div>
