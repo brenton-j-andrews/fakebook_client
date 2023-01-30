@@ -2,7 +2,7 @@
 
 import { useNavigate } from "react-router-dom";
 
-import { Container, Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 import profileImage from "../../assets/defaultProfileImage.png";
 
@@ -26,18 +26,18 @@ const FriendDisplay = ({ friends }) => {
 
             <div className="friends-display-grid">
                 {friends.map((friend, index) => {
-
-                    return (
-                        <div 
-                        className="friend-display-unit"
-                        key={index}
-                        onClick={() => {navigateToFriendProfile(friend._id)}}
-                        > 
-                        <img className="friend-display-unit-image" src={profileImage} alt=""/>
-                        {friend.fullName}
-                        </div>
-                    )
-
+                    
+                        return (
+                            <div 
+                                className="friend-display-unit"
+                                key={index}
+                                onClick={() => {navigateToFriendProfile(friend._id)}}
+                            > 
+                                <img className="friend-display-unit-image" src={profileImage} alt=""/>
+                                <p> {friend.fullName} </p>
+                            </div>
+                        )
+                    
                 })}
 
             </div>

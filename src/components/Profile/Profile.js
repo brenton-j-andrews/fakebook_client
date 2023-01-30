@@ -32,6 +32,7 @@ const Profile = () => {
             }
         })
         .then(response => {
+            console.log(response.data);
             setUserData(response.data);
             setReRenderProfile(false);
             setAuth(true);
@@ -52,18 +53,18 @@ const Profile = () => {
                         <h2> {userData.fullName} </h2>
                     </div>
 
-                    <Container className="profile-main" fluid>
+                    <Container className="profile-main d-flex justify-content-center" fluid>
 
                         <Row className="m-0 p-0">
 
                             {/* Friends Display Section */}
-                            <Col sm={12} md={4} className="d-flex flex-column align-items-center align-items-center">
+                            <Col sm={12} md={4} xl={3} className="d-flex flex-column align-items-center">
                                 <div> User Data </div>
                                 <FriendDisplay friends = {userData.friends}/>
                             </Col>
 
                             {/* Post Display Section */}
-                            <Col sm={12} md={8} className="post-display-container d-flex flex-column justify-content-center align-items-center"> 
+                            <Col sm={12} md={8} xl={8} className="post-display-container d-flex flex-column justify-content-center align-items-center"> 
                             
                                 {friend_id  === undefined &&
                                     <PostForm 

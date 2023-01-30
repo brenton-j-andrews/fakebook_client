@@ -175,6 +175,10 @@ code {
   flex-direction: column;
 }
 
+.profile-link {
+  text-decoration: none;
+}
+
 .comment-user-text {
   color: var(--primary-fb-blue);
 }
@@ -210,6 +214,7 @@ code {
 }
 
 .friend-display-unit {
+  max-height: 100px;
   position: relative;
   aspect-ratio: 1;
 }

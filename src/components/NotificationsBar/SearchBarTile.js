@@ -38,7 +38,7 @@ const SearchBarTile = ({ userItem: userObject }) => {
                 </div>
 
                 <div className='d-flex flex-column justify-content-center'> 
-                    <a href={`/${localStorage.getItem('user_id')}/visit/${userObject._id}`}> { userObject.fullName } </a>
+                    <a href={`/${localStorage.getItem('user_id')}/friend/${userObject._id}`}> { userObject.fullName } </a>
                     <p className='fs-5'> Friends </p>
                 </div>
             </Tile>

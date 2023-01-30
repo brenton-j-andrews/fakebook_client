@@ -47,9 +47,7 @@ function App() {
               exact
               path='/:id/profile'
               element = {
-                <Profile 
-                  isLoggedInUser={true}
-                />
+                <Profile />
               }
             /> 
 
@@ -57,9 +55,7 @@ function App() {
               exact
               path='/:id/friend/:friend_id'
               element = {
-                <Profile 
-                  isLoggedInUser={false}
-                />
+                <Profile />
               }
             />
 
